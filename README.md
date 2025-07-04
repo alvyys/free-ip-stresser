@@ -1,6 +1,3 @@
-Here’s your new information formatted for GitHub's README.md:
-
-````markdown
 # Quantum Stressor X1 - Ultimate Network Stresser & IP Booter 🚀
 
 **Made by [https://nightmare-stresser.co](https://nightmare-stresser.co) 🌙**
