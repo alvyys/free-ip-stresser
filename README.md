@@ -1,4 +1,4 @@
-# Quantum Stressor X1 - Ultimate Network Stresser & IP Booter 🚀
+# Quantum Stressor X1 - Ultimate Free Network Stresser & Free IP Booter 🚀
 
 **Made by [https://nightmare-stresser.co](https://nightmare-stresser.co) 🌙**
 
@@ -6,7 +6,7 @@
 
 ## 🚀 Introduction
 
-Say hello to **Quantum Stressor X1**—a powerhouse *Python IP Stresser* and *IP Booter* built for cinematic network stress testing!
+Say hello to **Quantum Stressor X1**—a powerhouse *Python free IP Stresser* and *IP Booter* built for cinematic network stress testing!
 
 - 🎮 Packed with **18 Layer 4 methods** and **6 Layer 7 methods** powered by the Nightmare Stresser API.
 - 🔍 Features API-driven attack controls for a thrilling hacker experience.
